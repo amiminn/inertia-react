@@ -21,27 +21,46 @@ function Button() {
 }
 
 function Index() {
-    function Helper() {
-        return <></>;
-    }
+    const [userData, setUserData] = useState({
+        name: "",
+    });
 
-    useEffect(() => {
-        let data = async () => {
-            let res = await axios.get(
-                "https://jsonplaceholder.typicode.com/photos"
-            );
-            console.log(res.data);
-        };
-        data();
-    }, []);
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setUserData({
+            ...userData,
+            [name]: value,
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(userData);
+    };
+
     return (
         <>
             <Layout>
                 <div className="flex justify-center">
-                    <div className="box p-40 bg-sky-400"></div>
+                    <div>{userData.name}</div>
                 </div>
                 <div>
-                    <Button></Button>
+                    <form className="grid gap-5" onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            placeholder="name"
+                            className="rounded-lg p-2 text-black border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                            value={userData.name}
+                            name="name"
+                            onChange={handleChange}
+                        />
+                        <button
+                            type="submit"
+                            className="py-2 px-6  bg-sky-400 rounded-lg"
+                        >
+                            submit
+                        </button>
+                    </form>
                 </div>
             </Layout>
         </>
