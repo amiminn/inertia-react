@@ -1,32 +1,53 @@
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
+import AES from "crypto-js/aes";
+import enc from "crypto-js/enc-utf8";
+import JsCookie from "js-cookie";
+import axios from "axios";
 
-import axios from 'axios';
+window.jsc = JsCookie;
+
+window.encryptData = function (data) {
+    try {
+        return AES.encrypt(data, window.Laravel.app_key).toString();
+    } catch (error) {
+        console.error("harap ubah json ke string");
+    }
+};
+
+window.decryptData = function (data) {
+    return AES.decrypt(data, window.Laravel.app_key).toString(enc);
+};
+
 window.axios = axios;
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.axios.defaults.headers.common["X-CSRF-TOKEN"] = window.Laravel.csrfToken;
+try {
+    window.axios.defaults.headers.common["Authorization"] =
+        "Bearer " + decryptData(tokenBearer);
+} catch (error) {}
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+import _ from "lodash";
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
+window._ = _;
 
-// import Echo from 'laravel-echo';
+String.prototype.isMatch = function (s) {
+    return this.match(s) !== null;
+};
+import { router } from "@inertiajs/react";
+window.router = router;
 
-// import Pusher from 'pusher-js';
+import "./key.js";
+Mousetrap.bind("ctrl+m", function () {
+    router.visit("/app-login");
+});
+
+// import Echo from "laravel-echo";
+
+// import Pusher from "pusher-js";
 // window.Pusher = Pusher;
 
 // window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: import.meta.env.VITE_PUSHER_APP_KEY,
-//     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? 'mt1',
-//     wsHost: import.meta.env.VITE_PUSHER_HOST ? import.meta.env.VITE_PUSHER_HOST : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
-//     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
-//     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
-//     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
-//     enabledTransports: ['ws', 'wss'],
+//     broadcaster: "pusher",
+//     key: Laravel.pusherKey,
+//     cluster: "ap1",
+//     forceTLS: true,
 // });

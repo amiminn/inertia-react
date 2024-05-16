@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    background-color: rgba(240, 248, 255, 0.193);
+}
+/* @layer components {
+  .zoomIn {
+    @apply animate__animated animate__zoomIn s_fast;
+  }
+
+  .zoomOut {
+    @apply animate__animated animate__zoomOut s_fast;
+  }
+} */
+
+.s_fast {
+    --animate-duration: 0.1s;
+}
