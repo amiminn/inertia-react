@@ -2,8 +2,8 @@
 
 echo proccess running program..
 
-@REM code .
+code .
 
-npm install
+@REM npm install
 pause
 pause

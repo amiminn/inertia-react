@@ -17,6 +17,16 @@ class DashboardController extends Controller
         return Inertia::render("dashboard/client/page");
     }
 
+    public function addClient()
+    {
+        return Inertia::render("dashboard/client/addClient");
+    }
+
+    public function showClient($id)
+    {
+        return Inertia::render("dashboard/client/showClient", compact('id'));
+    }
+
     public function users()
     {
         return Inertia::render("dashboard/users/page");
@@ -37,6 +47,15 @@ class DashboardController extends Controller
         return Inertia::render("dashboard/permission/page");
     }
 
+    public function addPermission()
+    {
+        return Inertia::render("dashboard/permission/addPermission");
+    }
+
+    public function showPermission($id)
+    {
+        return Inertia::render("dashboard/permission/showPermission", compact('id'));
+    }
     public function docs()
     {
         return Inertia::render("dashboard/docs/page");

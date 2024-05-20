@@ -9,6 +9,7 @@ function Page() {
         const res = await axios.get("api/users");
         setDataUser(res.data);
     }
+
     useEffect(() => {
         getData();
     }, []);

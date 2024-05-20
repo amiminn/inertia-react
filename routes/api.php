@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\ClientController;
 use App\Http\Controllers\api\RoleController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Http\Request;
@@ -10,6 +11,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware([])->group(function () {
+    Route::apiResource("client", ClientController::class);
+    Route::apiResource("permission", RoleController::class);
+
     Route::get("user-status/{id}", [UserController::class, 'status']);
     // Route::get("users={id}", [UserController::class, 'show']);
     Route::apiResource('users', UserController::class);
