@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
     resolve: {
         alias: {
-            "@": path.resolve("./resources/js"),
+            // "@": path.resolve("./resources/js"),
         },
     },
     plugins: [

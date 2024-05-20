@@ -43,7 +43,7 @@ export function Dropdown({
                 <span className="block px-4 py-2">{name}</span>
             </button>
             {isOpen && (
-                <ul className="absolute top-0 w-32 p-4 mt-10 origin-top-left bg-white rounded-md shadow-sm animate__animated animate__zoomIn s_fast">
+                <ul className="absolute top-0 z-50 grid w-32 gap-1 p-2 mt-10 ml-10 origin-top-left bg-white border rounded-md shadow-sm animate__animated animate__zoomIn s_fast">
                     {children}
                 </ul>
             )}

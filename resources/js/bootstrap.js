@@ -40,6 +40,21 @@ Mousetrap.bind("ctrl+m", function () {
     router.visit("/app-login");
 });
 
+import "./sweetAlert.js";
+
+const api = () => {
+    const url = window.location;
+    return url.origin + "/api/";
+};
+
+const suburl = () => {
+    const url = window.location;
+    return url.origin + "/api" + url.pathname;
+};
+
+window.api = api();
+window.subapi = suburl();
+
 // import Echo from "laravel-echo";
 
 // import Pusher from "pusher-js";

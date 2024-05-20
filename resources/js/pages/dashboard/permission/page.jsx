@@ -1,8 +1,11 @@
 import Layout from "@/components/layout";
+import { Card } from "@/components/components";
 function Page() {
     return (
         <>
-            <Layout>Permission</Layout>
+            <Layout>
+                <Card>Permission</Card>
+            </Layout>
         </>
     );
 }

@@ -11,5 +11,6 @@ Route::controller(DashboardController::class)->group(function () {
 
     // user manage
     Route::get("users", "users");
+    Route::get("users/{id}", "showUser");
     Route::get("tambah-user", "addUser");
 });

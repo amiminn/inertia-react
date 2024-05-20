@@ -2,24 +2,17 @@
 
 namespace App\Models;
 
-
+use Amiminn\Support\Response;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     protected $hidden = [
         'password',
@@ -31,13 +24,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function roles()
+    protected static function boot()
     {
-        return $this->belongsToMany(Role::class);
-    }
+        parent::boot();
 
-    public function permissions()
-    {
-        return $this->belongsToMany(Permission::class);
+        static::creating(function ($model) {
+            $model->id = Response::epoch();
+            $model->token = Response::random();
+        });
     }
 }

@@ -5,15 +5,32 @@
 :root {
     background-color: rgba(240, 248, 255, 0.193);
 }
-/* @layer components {
-  .zoomIn {
+@layer components {
+    /* .zoomIn {
     @apply animate__animated animate__zoomIn s_fast;
   }
 
   .zoomOut {
     @apply animate__animated animate__zoomOut s_fast;
-  }
-} */
+  } */
+    tr,
+    th,
+    td {
+        @apply p-4;
+    }
+
+    .form-input {
+        @apply bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5;
+    }
+
+    .form-file {
+        @apply block w-full text-sm text-gray-900 border border-gray-300 rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none;
+    }
+
+    label {
+        @apply block mb-2 text-sm font-semibold text-gray-700;
+    }
+}
 
 .s_fast {
     --animate-duration: 0.1s;

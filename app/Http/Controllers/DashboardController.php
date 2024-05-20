@@ -27,6 +27,11 @@ class DashboardController extends Controller
         return Inertia::render("dashboard/users/addUser");
     }
 
+    public function showUser($id)
+    {
+        return Inertia::render("dashboard/users/showUser", compact('id'));
+    }
+
     public function permission()
     {
         return Inertia::render("dashboard/permission/page");

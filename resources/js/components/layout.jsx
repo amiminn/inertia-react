@@ -33,6 +33,8 @@ export default function Layout({ children }) {
     }, []);
 
     const url = window.location.pathname;
+    const origin = window.location.origin + "/";
+
     const active =
         "flex items-center p-2 rounded-lg group text-gray-200 bg-[#0b1120d8]";
     const nonActive = "flex items-center p-2 rounded-lg group text-gray-900";
@@ -51,15 +53,15 @@ export default function Layout({ children }) {
                 }`}
             >
                 <div className="h-full px-3 pb-4 overflow-y-auto bg-white ">
-                    <div className="px-3 py-2 italic font-normal text-gray-500">
+                    {/* <div className="px-3 py-2 italic font-normal text-gray-500">
                         Dashboard
-                    </div>
+                    </div> */}
                     <ul className="space-y-2 font-medium">
                         {menuBar.map((data, id) => {
                             return (
                                 <li key={id}>
                                     <Link
-                                        href={data.link}
+                                        href={origin + data.link}
                                         className={
                                             url === "/" + data.link
                                                 ? active
@@ -72,15 +74,16 @@ export default function Layout({ children }) {
                             );
                         })}
                     </ul>
-                    <div className="px-3 py-2 italic font-normal text-gray-500">
+                    <hr className="my-5" />
+                    {/* <div className="px-3 py-2 italic font-normal text-gray-500">
                         Development
-                    </div>
+                    </div> */}
                     <ul className="space-y-2 font-medium">
                         {devBar.map((data, id) => {
                             return (
                                 <li key={id}>
                                     <Link
-                                        href={data.link}
+                                        href={origin + data.link}
                                         className={
                                             url === "/" + data.link
                                                 ? active
