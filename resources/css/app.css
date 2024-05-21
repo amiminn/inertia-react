@@ -13,6 +13,7 @@
   .zoomOut {
     @apply animate__animated animate__zoomOut s_fast;
   } */
+
     tr,
     th,
     td {

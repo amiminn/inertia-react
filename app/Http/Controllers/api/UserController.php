@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return User::get();
+        return User::paginate(10);
     }
 
     public function store(Request $request)
@@ -82,5 +82,10 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
+    }
+
+    public function userPaginate()
+    {
+        return User::paginate(5);
     }
 }

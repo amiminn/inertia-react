@@ -2,14 +2,20 @@ import Layout from "@/components/layout";
 import { Card } from "@/components/components";
 import { useEffect, useState } from "react";
 import { Dropdown } from "@/components/components";
+import Pagination from "@/components/pagiantion";
+
 function Page() {
-    const [dataUser, setDataUser] = useState([]);
+    const [dataUser, setDataUser] = useState({
+        data: [],
+    });
 
     async function getData() {
         const res = await axios.get("api/users");
         setDataUser(res.data);
     }
-
+    const handleDataFromPagination = (data) => {
+        setDataUser(data);
+    };
     useEffect(() => {
         getData();
     }, []);
@@ -83,10 +89,10 @@ function Page() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {dataUser.map((data, idx) => {
+                                {dataUser.data.map((data, idx) => {
                                     return (
                                         <tr key={idx}>
-                                            <td>1</td>
+                                            <td>{dataUser.from + idx}</td>
                                             <td>{data.name}</td>
                                             <td>{data.email}</td>
                                             <td>{data.role}</td>
@@ -122,6 +128,12 @@ function Page() {
                                 })}
                             </tbody>
                         </table>
+                    </div>
+                    <div className="my-4">
+                        <Pagination
+                            dataPaginate={dataUser}
+                            onData={handleDataFromPagination}
+                        ></Pagination>
                     </div>
                 </Card>
             </Layout>
