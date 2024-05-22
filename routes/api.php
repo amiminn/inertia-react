@@ -29,7 +29,8 @@ Route::get('faker', function () {
         User::create([
             "name" => $faker->name,
             "email" => $faker->email,
-            "password" => $faker->name
+            "password" => $faker->name,
+            "username" => UserController::toLower($faker->name),
         ]);
     }
     return ["success" => true];

@@ -25,7 +25,7 @@ function Pagination({ onData, dataPaginate }) {
         <>
             <div className="flex items-center justify-between">
                 <div className="text-sm italic text-gray-500">
-                    {dataPaginate.to}/{dataPaginate.total}
+                    {dataPaginate && dataPaginate.to + "/" + dataPaginate.total}
                 </div>
                 <div className="flex justify-end gap-1">
                     {dataPaginate.links?.map((data, id) => {

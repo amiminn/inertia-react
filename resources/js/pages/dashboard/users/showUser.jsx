@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import { Card } from "@/components/components";
 import { useEffect, useState } from "react";
+import UpdateAvatar from "./updateAvatar";
 
 function Show({ id }) {
     const [formData, setFormData] = useState({
@@ -44,8 +45,8 @@ function Show({ id }) {
 
     return (
         <Layout>
-            <div className="grid grid-cols-3 gap-2">
-                <div className="col-span-2">
+            <div className="grid md:lg:grid-cols-3 gap-2">
+                <div className=" md:lg:col-span-2">
                     <Card>
                         <form onSubmit={updateData}>
                             <div className="grid gap-4 md:lg:grid-cols-2">
@@ -96,15 +97,7 @@ function Show({ id }) {
                         </form>
                     </Card>
                 </div>
-                <Card>
-                    avatar
-                    <button
-                        type="submit"
-                        className="w-full py-2 my-4 text-white rounded bg-slate-600"
-                    >
-                        update avatar
-                    </button>
-                </Card>
+                <UpdateAvatar />
             </div>
         </Layout>
     );

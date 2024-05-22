@@ -21,6 +21,7 @@ class UserController extends Controller
         try {
             $data = [
                 "name" => $request->name,
+                "username" => self::toLower($request->name),
                 "email" => $request->email,
                 "password" => Hash::make($request->name),
                 "role_id" => $request->role_id,
@@ -44,6 +45,7 @@ class UserController extends Controller
             $user = User::whereId($id);
             $data = [
                 "name" => $request->name,
+                "username" => self::toLower($request->name),
                 "email" => $request->email,
                 "password" => Hash::make($request->name),
                 "role_id" => $request->role_id,
@@ -87,5 +89,11 @@ class UserController extends Controller
     public function userPaginate()
     {
         return User::paginate(5);
+    }
+
+    public static function toLower($originalString)
+    {
+        $lowercaseString = strtolower($originalString);
+        return str_replace(' ', '', $lowercaseString);
     }
 }

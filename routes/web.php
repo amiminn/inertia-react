@@ -10,6 +10,8 @@ Route::get("/", function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::get("login", "login");
+    Route::post("login", "toLogin");
+    Route::post("logout", "logout");
 });
 
 Route::controller(DashboardController::class)->group(function () {
