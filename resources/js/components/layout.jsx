@@ -25,6 +25,27 @@ export default function Layout({ children }) {
         }
     };
 
+    function logout() {
+        Swal.fire({
+            title: "Are you sure logout?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("logout");
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success",
+                });
+            }
+        });
+    }
+
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
@@ -36,8 +57,9 @@ export default function Layout({ children }) {
     const origin = window.location.origin + "/";
 
     const active =
-        "flex items-center p-2 rounded-lg group text-gray-200 bg-[#0b1120d8]";
-    const nonActive = "flex items-center p-2 rounded-lg group text-gray-900";
+        "flex items-center p-2 rounded-lg group text-gray-200 bg-[#2E3650]";
+    const nonActive =
+        "flex items-center p-2 rounded-lg group hover:bg-[#2E3650]";
 
     const setting = {
         sidebarLogo: "https://flowbite.com/docs/images/logo.svg",
@@ -48,12 +70,12 @@ export default function Layout({ children }) {
         return (
             <aside
                 ref={sidebarRef}
-                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform  bg-white border-r border-gray-200 sm:translate-x-0 ${
+                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform text-white bg-[#262B40] border-r border-gray-200 sm:translate-x-0 ${
                     isOpen ? "transform-none" : "-translate-x-full"
                 }`}
             >
-                <div className="h-full px-3 pb-4 overflow-y-auto bg-white ">
-                    {/* <div className="px-3 py-2 italic font-normal text-gray-500">
+                <div className="h-full px-3 pb-4 overflow-y-auto bg-[#262B40] ">
+                    {/* <div className="px-3 py-2 italic font-normal ">
                         Dashboard
                     </div> */}
                     <ul className="space-y-2 font-medium">
@@ -74,8 +96,8 @@ export default function Layout({ children }) {
                             );
                         })}
                     </ul>
-                    <hr className="my-5" />
-                    {/* <div className="px-3 py-2 italic font-normal text-gray-500">
+                    <hr className="my-5 border-[#2E3650]" />
+                    {/* <div className="px-3 py-2 italic font-normal ">
                         Development
                     </div> */}
                     <ul className="space-y-2 font-medium">
@@ -107,7 +129,7 @@ export default function Layout({ children }) {
                 {!isOpen ? (
                     <button
                         onClick={toggleSidebar}
-                        className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+                        className="inline-flex items-center p-2 text-sm text-white rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
                     >
                         <span className="sr-only">Open sidebar</span>
                         <svg
@@ -120,7 +142,7 @@ export default function Layout({ children }) {
                         </svg>
                     </button>
                 ) : (
-                    <button className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 ">
+                    <button className="inline-flex items-center p-2 text-sm text-white rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 ">
                         <svg
                             className="w-6 h-6"
                             fill="currentColor"
@@ -137,7 +159,7 @@ export default function Layout({ children }) {
 
     function Nav() {
         return (
-            <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 ">
+            <nav className="fixed top-0 z-50 w-full bg-[#262B40] border-b border-gray-200 ">
                 <div className="px-3 py-3 lg:px-5 lg:pl-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center justify-start">
@@ -148,7 +170,7 @@ export default function Layout({ children }) {
                                     className="h-8 me-3"
                                     alt="FlowBite Logo"
                                 />
-                                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap ">
+                                <span className="self-center text-xl font-semibold text-white sm:text-2xl whitespace-nowrap ">
                                     {setting.sidebarName}
                                 </span>
                             </div>
@@ -158,7 +180,7 @@ export default function Layout({ children }) {
                                 <div>
                                     <button
                                         onClick={toggleNavBar}
-                                        className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 "
+                                        className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-white "
                                     >
                                         <span className="sr-only">
                                             Open user menu
@@ -185,12 +207,20 @@ export default function Layout({ children }) {
                                         </div>
                                         <ul className="py-1">
                                             <li>
-                                                <a
-                                                    href="#"
-                                                    className="block px-4 py-2 text-sm font-semibold text-rose-700 hover:bg-rose-100 "
+                                                <Link
+                                                    href="/profile"
+                                                    className="block px-4 py-2 text-sm hover:bg-slate-100 "
+                                                >
+                                                    Profile
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    onClick={logout}
+                                                    className="block w-full px-4 py-2 text-sm font-semibold cursor-pointer text-rose-700 hover:bg-rose-100"
                                                 >
                                                     Logout
-                                                </a>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>

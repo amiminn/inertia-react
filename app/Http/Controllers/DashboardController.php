@@ -12,6 +12,11 @@ class DashboardController extends Controller
         return Inertia::render("dashboard/page");
     }
 
+    public function profile()
+    {
+        return Inertia::render("dashboard/profile/page");
+    }
+
     public function client()
     {
         return Inertia::render("dashboard/client/page");

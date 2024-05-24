@@ -32,4 +32,7 @@ Route::controller(DashboardController::class)->group(function () {
     Route::get("permission", "permission");
     Route::get("permission/{id}", "showPermission");
     Route::get("tambah-permission", "addPermission");
+
+    // profile
+    Route::get("profile", "profile");
 });
