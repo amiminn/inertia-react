@@ -9,13 +9,13 @@ Route::get("/", function () {
 });
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get("login", "login");
+    Route::get("login", "login")->name("login")->middleware("guest");
     Route::post("login", "toLogin");
-    Route::post("logout", "logout");
+    Route::get("logout", "logout")->middleware("auth");
 });
 
-Route::controller(DashboardController::class)->group(function () {
-    Route::get("dashboard", "dashboard");
+Route::controller(DashboardController::class)->middleware("auth")->group(function () {
+    Route::get("dashboard", "dashboard")->name("home");
     Route::get("docs", "docs");
 
     // user manage

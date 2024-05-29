@@ -33,13 +33,14 @@ export default function Layout({ children }) {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonText: "Yes, logout!",
         }).then((result) => {
             if (result.isConfirmed) {
                 console.log("logout");
+                window.location.href = "/logout";
                 Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
+                    title: "Sign Out!",
+                    text: "Your file has been signout.",
                     icon: "success",
                 });
             }
@@ -60,21 +61,25 @@ export default function Layout({ children }) {
         "flex items-center p-2 rounded-lg group text-gray-200 bg-[#2E3650]";
     const nonActive =
         "flex items-center p-2 rounded-lg group hover:bg-[#2E3650]";
-
+    const mainColor = "[#262B40]";
     const setting = {
         sidebarLogo: "https://flowbite.com/docs/images/logo.svg",
         sidebarName: "Microservice",
     };
+    const colorAvatar = "7469B6";
+    const avatar = `https://ui-avatars.com/api/?background=${colorAvatar}&color=fff&name=${user.name}&bold=true`;
 
     function Aside() {
         return (
             <aside
                 ref={sidebarRef}
-                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform text-white bg-[#262B40] border-r border-gray-200 sm:translate-x-0 ${
+                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform text-white bg-${mainColor} border-r border-gray-200 sm:translate-x-0 ${
                     isOpen ? "transform-none" : "-translate-x-full"
                 }`}
             >
-                <div className="h-full px-3 pb-4 overflow-y-auto bg-[#262B40] ">
+                <div
+                    className={`h-full px-3 pb-4 overflow-y-auto bg-${mainColor} `}
+                >
                     {/* <div className="px-3 py-2 italic font-normal ">
                         Dashboard
                     </div> */}
@@ -159,7 +164,9 @@ export default function Layout({ children }) {
 
     function Nav() {
         return (
-            <nav className="fixed top-0 z-50 w-full bg-[#262B40] border-b border-gray-200 ">
+            <nav
+                className={`fixed top-0 z-50 w-full bg-${mainColor} border-b border-${mainColor} `}
+            >
                 <div className="px-3 py-3 lg:px-5 lg:pl-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center justify-start">
@@ -185,11 +192,19 @@ export default function Layout({ children }) {
                                         <span className="sr-only">
                                             Open user menu
                                         </span>
-                                        <img
-                                            className="w-8 h-8 rounded-full"
-                                            src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                            alt="user photo"
-                                        />
+                                        {user.avatar ? (
+                                            <img
+                                                className="w-8 h-8 rounded-full"
+                                                src={user.avatar}
+                                                alt="user photo"
+                                            />
+                                        ) : (
+                                            <img
+                                                className="w-8 h-8 rounded-full"
+                                                src={avatar}
+                                                alt="user photo"
+                                            />
+                                        )}
                                     </button>
                                 </div>
                                 {isOpenNav && (
@@ -199,10 +214,10 @@ export default function Layout({ children }) {
                                     >
                                         <div className="px-4 py-3">
                                             <p className="text-sm text-gray-900 ">
-                                                Neil Sims
+                                                {user.name}
                                             </p>
                                             <p className="text-sm font-medium text-gray-900 truncate ">
-                                                neil.sims@flowbite.com
+                                                {user.email}
                                             </p>
                                         </div>
                                         <ul className="py-1">

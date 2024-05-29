@@ -31,6 +31,10 @@
     label {
         @apply block mb-2 text-sm font-semibold text-gray-700;
     }
+
+    .card-label {
+        @apply font-semibold mb-4 text-lg text-gray-600;
+    }
 }
 
 .s_fast {
