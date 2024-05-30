@@ -1,31 +1,72 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function Avatar() {
+    const [upload, setUpload] = useState(false);
     const colorAvatar = "7469B6";
-    const avatar = `https://ui-avatars.com/api/?background=${colorAvatar}&color=fff&name=${user.name}&bold=true`;
+    const [avatar, setAvatar] = useState("");
     const [image, setImage] = useState(null);
     const inputRef = useRef(null);
-    async function deleteAvatar() {}
+
+    async function deleteAvatar() {
+        Swal.fire({
+            title: "Are you sure delete avatar?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axios.post("api/delete-avatar");
+                toast(res.data.msg);
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success",
+                });
+            }
+        });
+    }
 
     async function updateAvatar() {
         inputRef.current.click();
     }
 
     function changeAvatar(e) {
-        setImage(e.target.files[0]);
-        setTimeout(async () => {
-            try {
-                let formData = new FormData();
-                formData.append("avatar", image);
-                const res = await axios.post("api/update-avatar", formData);
-                console.log(res);
-            } catch (error) {
-                console.log(error);
-            }
-        }, 2000);
+        const file = e.target.files[0];
+        if (file) {
+            setImage(file);
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                setAvatar(e.target.result);
+            };
+            reader.readAsDataURL(file);
+            setUpload(true);
+        }
     }
 
-    // async;
+    async function uploadAvatar() {
+        try {
+            let formData = new FormData();
+            formData.append("avatar", image);
+            const res = await axios.post("api/update-avatar", formData);
+            toast(res.data.msg);
+            setUpload(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        if (user.avatar) {
+            setAvatar(user.avatar);
+        } else {
+            setAvatar(
+                `https://ui-avatars.com/api/?background=${colorAvatar}&color=fff&name=${user.name}&bold=true`
+            );
+        }
+    }, []);
 
     return (
         <>
@@ -57,6 +98,14 @@ function Avatar() {
                     >
                         hapus avatar
                     </div>
+                    {upload && (
+                        <button
+                            onClick={uploadAvatar}
+                            className="col-span-2 py-1 my-2 text-white rounded bg-slate-400"
+                        >
+                            upload
+                        </button>
+                    )}
                 </div>
             </div>
         </>

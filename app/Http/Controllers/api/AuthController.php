@@ -56,15 +56,27 @@ class AuthController extends Controller
     public function updateAvatar(Request $request)
     {
         try {
-            FileService::saveOnetoAsset($request, "avatar", "avatar");
+            $avatar = FileService::saveOnetoAsset($request, "avatar", "avatar");
+            User::whereId(Auth::user()->id)->update([
+                "avatar" => $avatar
+            ]);
             return Response::success("Avatar berhasil diperbarui.");
         } catch (\Throwable $th) {
             //throw $th;
         }
     }
 
-    public function hapusAvatar(Request $request)
+    public function deleteAvatar(Request $request)
     {
-        //code
+        try {
+            $avatar = User::whereId(Auth::user()->id);
+            FileService::deleteFileAsset($avatar->first()->avatar);
+            $avatar->update([
+                "avatar" => null
+            ]);
+            return Response::success("Avatar berhasil dihapus.");
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }

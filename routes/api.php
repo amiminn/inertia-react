@@ -27,6 +27,7 @@ Route::middleware([])->group(function () {
         Route::post("update-profile", [AuthController::class, "updateProfile"]);
         Route::post("update-password", [AuthController::class, "updatePass"]);
         Route::post("update-avatar", [AuthController::class, "updateAvatar"]);
+        Route::post("delete-avatar", [AuthController::class, "deleteAvatar"]);
     });
 });
 

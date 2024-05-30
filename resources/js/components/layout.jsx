@@ -61,7 +61,8 @@ export default function Layout({ children }) {
         "flex items-center p-2 rounded-lg group text-gray-200 bg-[#2E3650]";
     const nonActive =
         "flex items-center p-2 rounded-lg group hover:bg-[#2E3650]";
-    const mainColor = "[#262B40]";
+    // const mainColor = "[#262B40]";
+    const mainColor = "black";
     const setting = {
         sidebarLogo: "https://flowbite.com/docs/images/logo.svg",
         sidebarName: "Microservice",
@@ -195,7 +196,7 @@ export default function Layout({ children }) {
                                         {user.avatar ? (
                                             <img
                                                 className="w-8 h-8 rounded-full"
-                                                src={user.avatar}
+                                                src={base + user.avatar}
                                                 alt="user photo"
                                             />
                                         ) : (

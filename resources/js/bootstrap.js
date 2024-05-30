@@ -41,18 +41,9 @@ Mousetrap.bind("ctrl+m", function () {
 
 import "./sweetAlert.js";
 
-const api = () => {
-    const url = window.location;
-    return url.origin + "/api/";
-};
-
-const suburl = () => {
-    const url = window.location;
-    return url.origin + "/api" + url.pathname;
-};
-
-window.api = api();
-window.subapi = suburl();
+window.api = window.location.origin + "/api/";
+window.base = window.location.origin + "/";
+window.subapi = window.location.origin + "/api" + window.location.pathname;
 
 // import Echo from "laravel-echo";
 
