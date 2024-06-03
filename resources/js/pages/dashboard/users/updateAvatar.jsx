@@ -1,68 +1,132 @@
-import { Card } from "@/components/components";
-import { useState } from "react";
-import { FileUploader } from "react-drag-drop-files";
+import { useEffect, useRef, useState } from "react";
 
-function updateAvatar() {
-    const fileTypes = ["JPG", "PNG", "GIF"];
-    const [file, setFile] = useState(null);
-    const [isUpdateAvatar, setIsUpdateAvatar] = useState(false);
-    const handleChange = (file) => {
-        setFile(file);
-    };
-
-    function sub() {
-        console.log(file.name);
+function Avatar({ id }) {
+    const [formData, setFormData] = useState({
+        avatar: "",
+    });
+    const [upload, setUpload] = useState(false);
+    const colorAvatar = "7469B6";
+    const [avatar, setAvatar] = useState("");
+    const [image, setImage] = useState(null);
+    const inputRef = useRef(null);
+    async function deleteAvatar() {
+        Swal.fire({
+            title: "Are you sure delete avatar?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axios.post(
+                    base + "api/delete-user-avatar&id=" + id
+                );
+                toast(res.data.msg);
+                getData();
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success",
+                });
+            }
+        });
     }
+
+    async function updateAvatar() {
+        inputRef.current.click();
+    }
+
+    function changeAvatar(e) {
+        const file = e.target.files[0];
+        if (file) {
+            setImage(file);
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                setAvatar(e.target.result);
+            };
+            reader.readAsDataURL(file);
+            setUpload(true);
+        }
+    }
+
+    async function uploadAvatar() {
+        try {
+            let formData = new FormData();
+            formData.append("avatar", image);
+            const res = await axios.post(
+                base + "api/update-user-avatar&id=" + id,
+                formData
+            );
+            toast(res.data.msg);
+            setUpload(false);
+            getData();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function getData() {
+        const res = await axios.get(api + "users/" + id);
+        let avatarUser = res.data.avatar;
+        if (avatarUser) {
+            setAvatar(base + avatarUser);
+            console.log("isi");
+        } else {
+            console.log("null");
+            setAvatar(
+                `https://ui-avatars.com/api/?background=${colorAvatar}&color=fff&name=${user.name}&bold=true`
+            );
+        }
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <>
-            <Card>
-                <div className="grid gap-3">
-                    <div className="flex justify-between">
-                        <div>avatar</div>
-                        {isUpdateAvatar && (
-                            <button
-                                className="text-right italic text-red-700"
-                                onClick={() => setIsUpdateAvatar(false)}
-                            >
-                                batal
-                            </button>
-                        )}
+            <div className="card-label">avatar</div>
+            <div className="grid justify-center gap-3 ">
+                <div className="flex justify-center">
+                    <img
+                        src={avatar}
+                        alt="avatar"
+                        className="w-32 h-32 rounded-full"
+                    />
+                </div>
+                <div className="grid grid-cols-2">
+                    <input
+                        type="file"
+                        onChange={changeAvatar}
+                        ref={inputRef}
+                        hidden
+                    />
+                    <div
+                        onClick={updateAvatar}
+                        className="px-3 py-1 text-center border rounded-l-lg cursor-pointer hover:bg-slate-100"
+                    >
+                        edit avatar
                     </div>
-                    {isUpdateAvatar ? (
-                        <>
-                            <FileUploader
-                                handleChange={handleChange}
-                                name="file"
-                                multiple={false}
-                                types={fileTypes}
-                                classes={""}
-                            />
-                            <p className="text-sm text-rose-400 text-center italic">
-                                {file && `${file.name}`}
-                            </p>
-                            <button
-                                onClick={sub}
-                                className="bg-slate-600 text-white rounded py-2 my-4"
-                            >
-                                update
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            is avatar
-                            <button
-                                onClick={() => setIsUpdateAvatar(true)}
-                                className="bg-slate-600 text-white rounded py-2 my-4"
-                            >
-                                upload disini
-                            </button>
-                        </>
+                    <div
+                        onClick={deleteAvatar}
+                        className="px-3 py-1 text-center border rounded-r-lg cursor-pointer hover:bg-rose-100 hover:text-rose-600"
+                    >
+                        hapus avatar
+                    </div>
+                    {upload && (
+                        <button
+                            onClick={uploadAvatar}
+                            className="col-span-2 py-1 my-2 text-white rounded bg-slate-400"
+                        >
+                            upload
+                        </button>
                     )}
                 </div>
-            </Card>
+            </div>
         </>
     );
 }
 
-export default updateAvatar;
+export default Avatar;

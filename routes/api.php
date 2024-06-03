@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('user', function (Request $request) {
     return $request->user();
 });
 
@@ -21,6 +21,8 @@ Route::middleware([])->group(function () {
     Route::get("user-paginate", [UserController::class, "userPaginate"]);
     // Route::get("users={id}", [UserController::class, 'show']);
     Route::apiResource('users', UserController::class);
+    Route::post("update-user-avatar&id={id}", [UserController::class, "updateUserAvatar"]);
+    Route::post("delete-user-avatar&id={id}", [UserController::class, "deleteUserAvatar"]);
     Route::apiResource('roles', RoleController::class);
     Route::middleware(["auth:sanctum"])->group(function () {
         Route::get("profile", [AuthController::class, "index"]);

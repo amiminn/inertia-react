@@ -2,6 +2,7 @@ import Layout from "@/components/layout";
 import { Card } from "@/components/components";
 import { useEffect, useState } from "react";
 import UpdateAvatar from "./updateAvatar";
+import { Kembali } from "@/components/components";
 
 function Show({ id }) {
     const [formData, setFormData] = useState({
@@ -45,6 +46,7 @@ function Show({ id }) {
 
     return (
         <Layout>
+            <Kembali></Kembali>
             <div className="grid md:lg:grid-cols-3 gap-2">
                 <div className=" md:lg:col-span-2">
                     <Card>
@@ -97,7 +99,9 @@ function Show({ id }) {
                         </form>
                     </Card>
                 </div>
-                <UpdateAvatar />
+                <Card>
+                    <UpdateAvatar id={id} />
+                </Card>
             </div>
         </Layout>
     );

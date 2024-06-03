@@ -42,7 +42,14 @@ function Page() {
         <>
             <Layout>
                 <Card>
-                    <Link href="tambah-client">tambah client</Link>
+                    <div className="flex justify-end mb-2">
+                        <Link
+                            href="tambah-client"
+                            className="bg-gray-600 text-white py-2 px-6 rounded"
+                        >
+                            tambah client
+                        </Link>
+                    </div>
                     <div className="rounded">
                         <table className="w-full text-left ">
                             <thead className="text-white bg-gray-600">
@@ -66,7 +73,7 @@ function Page() {
                                                         href={
                                                             "/client/" + data.id
                                                         }
-                                                        className="px-2 py-1 rounded cursor-pointer w-max hover:bg-slate-200"
+                                                        className="block px-2 py-1 rounded cursor-pointer  hover:bg-slate-200"
                                                     >
                                                         lihat
                                                     </Link>

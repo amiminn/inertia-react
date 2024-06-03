@@ -73,19 +73,6 @@ class UserController extends Controller
         return Response::success("status user berhasil diperbarui.");
     }
 
-    public function updateAvatar(Request $request, $id)
-    {
-        try {
-            $user = User::whereId($id);
-            $avatar = FileService::saveOnetoAsset($request, "avatar", "avatar");
-            $user->update([
-                'avatar' => $avatar
-            ]);
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-        }
-    }
-
     public function userPaginate()
     {
         return User::paginate(5);
@@ -95,5 +82,38 @@ class UserController extends Controller
     {
         $lowercaseString = strtolower($originalString);
         return str_replace(' ', '', $lowercaseString);
+    }
+
+    public function updateUserAvatar(Request $request, $id)
+    {
+        try {
+            $user = User::whereId($id);
+            if ($user->first()->avatar != null) {
+                FileService::deleteFileAsset($user->first()->avatar);
+            }
+            $avatar = FileService::saveOnetoAsset($request, "avatar", "avatar");
+            $user->update([
+                "avatar" => $avatar
+            ]);
+            return Response::success("Avatar berhasil diperbarui.");
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function deleteUserAvatar(Request $request, $id)
+    {
+        try {
+            $avatar = User::whereId($id);
+            if ($avatar->first()->avatar != null) {
+                FileService::deleteFileAsset($avatar->first()->avatar);
+            }
+            $avatar->update([
+                "avatar" => null
+            ]);
+            return Response::success("Avatar berhasil dihapus.");
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }

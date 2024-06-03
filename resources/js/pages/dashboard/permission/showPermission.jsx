@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import { Card } from "@/components/components";
 import { useEffect, useState } from "react";
+import { Kembali } from "@/components/components";
 
 function Show({ id }) {
     const [formData, setFormData] = useState({
@@ -42,6 +43,7 @@ function Show({ id }) {
         <Layout>
             <div className="grid">
                 <div className="">
+                    <Kembali></Kembali>
                     <Card>
                         <form onSubmit={updateData}>
                             <div className="grid gap-4 md:lg:grid-cols-2">

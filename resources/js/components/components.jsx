@@ -153,3 +153,17 @@ export function Modal() {
         </div>
     );
 }
+
+import iconBack from "@/icon/arrow-small-left_3916837.svg";
+export function Kembali() {
+    return (
+        <>
+            <button
+                className="rounded py-1 px-3 mb-2"
+                onClick={() => window.history.back()}
+            >
+                <img src={iconBack} className="w-10 text-white" alt="back" />
+            </button>
+        </>
+    );
+}

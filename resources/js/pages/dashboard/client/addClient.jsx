@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import { Card } from "@/components/components";
 import { useState } from "react";
+import { Kembali } from "@/components/components";
 
 function addClient() {
     const [formData, setFormData] = useState({
@@ -29,6 +30,7 @@ function addClient() {
     };
     return (
         <Layout>
+            <Kembali></Kembali>
             <Card>
                 <form onSubmit={handleSubmit}>
                     <div className="grid gap-4 ">

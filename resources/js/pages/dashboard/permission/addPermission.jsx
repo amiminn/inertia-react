@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import { Card } from "@/components/components";
 import { useState } from "react";
+import { Kembali } from "@/components/components";
 
 function addPermission() {
     const [formData, setFormData] = useState({
@@ -27,6 +28,7 @@ function addPermission() {
     };
     return (
         <Layout>
+            <Kembali></Kembali>
             <Card>
                 <form onSubmit={handleSubmit}>
                     <div className="grid gap-4 ">

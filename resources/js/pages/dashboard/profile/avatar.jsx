@@ -20,6 +20,7 @@ function Avatar() {
             if (result.isConfirmed) {
                 const res = await axios.post("api/delete-avatar");
                 toast(res.data.msg);
+                getData();
                 Swal.fire({
                     title: "Deleted!",
                     text: "Your file has been deleted.",
@@ -52,20 +53,27 @@ function Avatar() {
             formData.append("avatar", image);
             const res = await axios.post("api/update-avatar", formData);
             toast(res.data.msg);
+            getData();
             setUpload(false);
         } catch (error) {
             console.log(error);
         }
     }
 
-    useEffect(() => {
-        if (user.avatar) {
-            setAvatar(user.avatar);
+    async function getData() {
+        const res = await axios.get(api + "user");
+        let avatarUser = res.data.avatar;
+        if (avatarUser) {
+            setAvatar(base + avatarUser);
         } else {
             setAvatar(
                 `https://ui-avatars.com/api/?background=${colorAvatar}&color=fff&name=${user.name}&bold=true`
             );
         }
+    }
+
+    useEffect(() => {
+        getData();
     }, []);
 
     return (

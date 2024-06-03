@@ -61,8 +61,9 @@ export default function Layout({ children }) {
         "flex items-center p-2 rounded-lg group text-gray-200 bg-[#2E3650]";
     const nonActive =
         "flex items-center p-2 rounded-lg group hover:bg-[#2E3650]";
-    // const mainColor = "[#262B40]";
-    const mainColor = "black";
+    const mainColor = "bg-[#262B40]";
+    const mainBorder = "border-[#262B40]";
+
     const setting = {
         sidebarLogo: "https://flowbite.com/docs/images/logo.svg",
         sidebarName: "Microservice",
@@ -74,12 +75,12 @@ export default function Layout({ children }) {
         return (
             <aside
                 ref={sidebarRef}
-                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform text-white bg-${mainColor} border-r border-gray-200 sm:translate-x-0 ${
+                className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform text-white ${mainColor} border-r border-gray-200 sm:translate-x-0 ${
                     isOpen ? "transform-none" : "-translate-x-full"
                 }`}
             >
                 <div
-                    className={`h-full px-3 pb-4 overflow-y-auto bg-${mainColor} `}
+                    className={`h-full px-3 pb-4 overflow-y-auto ${mainColor} `}
                 >
                     {/* <div className="px-3 py-2 italic font-normal ">
                         Dashboard
@@ -166,7 +167,7 @@ export default function Layout({ children }) {
     function Nav() {
         return (
             <nav
-                className={`fixed top-0 z-50 w-full bg-${mainColor} border-b border-${mainColor} `}
+                className={`fixed top-0 z-50 w-full ${mainColor} border-b ${mainBorder} `}
             >
                 <div className="px-3 py-3 lg:px-5 lg:pl-3">
                     <div className="flex items-center justify-between">
