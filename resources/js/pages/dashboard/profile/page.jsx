@@ -5,10 +5,6 @@ import Information from "./editInformation";
 import Avatar from "./avatar";
 
 function Page() {
-    function updateInformation(e) {
-        e.preventDefault();
-        console.log("updateInformation");
-    }
     return (
         <>
             <Layout>

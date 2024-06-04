@@ -36,7 +36,6 @@ export default function Layout({ children }) {
             confirmButtonText: "Yes, logout!",
         }).then((result) => {
             if (result.isConfirmed) {
-                console.log("logout");
                 window.location.href = "/logout";
                 Swal.fire({
                     title: "Sign Out!",

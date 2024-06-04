@@ -56,7 +56,7 @@ function Avatar() {
             getData();
             setUpload(false);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     }
 

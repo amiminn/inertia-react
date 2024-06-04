@@ -63,7 +63,7 @@ function Avatar({ id }) {
             setUpload(false);
             getData();
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     }
 
@@ -72,9 +72,7 @@ function Avatar({ id }) {
         let avatarUser = res.data.avatar;
         if (avatarUser) {
             setAvatar(base + avatarUser);
-            console.log("isi");
         } else {
-            console.log("null");
             setAvatar(
                 `https://ui-avatars.com/api/?background=${colorAvatar}&color=fff&name=${user.name}&bold=true`
             );

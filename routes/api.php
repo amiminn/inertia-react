@@ -34,22 +34,22 @@ Route::middleware([])->group(function () {
 });
 
 Route::get('faker', function () {
-    // $faker = Faker\Factory::create('id_ID');
+    $faker = Faker\Factory::create('id_ID');
 
-    // for ($i = 0; $i < 20; $i++) {
+    for ($i = 0; $i < 20; $i++) {
+        User::create([
+            "name" => $faker->name,
+            "email" => $faker->email,
+            "password" => $faker->name,
+            "username" => UserController::toLower($faker->name),
+        ]);
+    }
     // User::create([
-    //     "name" => $faker->name,
-    //     "email" => $faker->email,
-    //     "password" => $faker->name,
-    //     "username" => UserController::toLower($faker->name),
+    //     "name" => "amiminn",
+    //     "email" => "amiminn@mail.com",
+    //     "password" => Hash::make("admin1"),
+    //     "username" => "amiminn",
     // ]);
-    // }
-    User::create([
-        "name" => "amiminn",
-        "email" => "amiminn@mail.com",
-        "password" => Hash::make("admin1"),
-        "username" => "amiminn",
-    ]);
 
     return ["success" => true];
 });
