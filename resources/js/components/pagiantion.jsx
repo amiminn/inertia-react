@@ -1,4 +1,4 @@
-import next from "@/icon/angle-double-small-right_3916771.svg";
+import next from "@/icon/angle-right_3916959.svg";
 
 function Pagination({ onData, dataPaginate }) {
     async function hitPoin(data) {
@@ -7,7 +7,14 @@ function Pagination({ onData, dataPaginate }) {
     }
 
     function NextIcon() {
-        return <img loading="lazy" src={next} alt="next" className="w-6 h-6" />;
+        return (
+            <img
+                loading="lazy"
+                src={next}
+                alt="next"
+                className="w-6 h-6 py-[0.3rem]"
+            />
+        );
     }
 
     function PrevIcon() {
@@ -16,7 +23,7 @@ function Pagination({ onData, dataPaginate }) {
                 loading="lazy"
                 src={next}
                 alt="next"
-                className="w-6 h-6 rotate-180"
+                className="w-6 h-6 py-[0.3rem] rotate-180"
             />
         );
     }
@@ -29,7 +36,7 @@ function Pagination({ onData, dataPaginate }) {
                         ? ""
                         : dataPaginate.to + "/" + dataPaginate.total}
                 </div>
-                <div className="flex justify-end gap-1">
+                <div className="flex justify-end">
                     {dataPaginate.links?.map((data, id) => {
                         return (
                             <div
@@ -40,7 +47,7 @@ function Pagination({ onData, dataPaginate }) {
                                     <div
                                         className={
                                             data.label != "..."
-                                                ? `px-3 py-1 text-white bg-slate-600 rounded`
+                                                ? `px-[1.2rem] py-1 text-white bg-slate-600 border-[1px] border-slate-600`
                                                 : `px-4`
                                         }
                                     >
@@ -48,7 +55,7 @@ function Pagination({ onData, dataPaginate }) {
                                     </div>
                                 ) : (
                                     <div
-                                        className={`px-3 py-1 cursor-pointer bg-slate-200 rounded`}
+                                        className={`px-[1.2rem] py-1 cursor-pointer border-[1px] border-slate-200`}
                                         onClick={() => hitPoin(data.url)}
                                     >
                                         {data.label == "Next &raquo;" ? (
