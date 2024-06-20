@@ -9,7 +9,7 @@
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>😏</text></svg>"
     />
     <script>
-      window.Laravel = {csrfToken: '{{ csrf_token() }}',app_key : '{{ env("APP_KEY") }}',url : '{{ env("APP_URL") }}'}
+      window.Laravel = {csrfToken: '{{ csrf_token() }}',app_key : '{{ env("APP_KEY") }}',url : '{{ env("APP_URL") }}', pusherKey : '{{ env("PUSHER_APP_KEY") }}'}
       @auth
         let user = {{ Js::from(auth()->user()) }};let token = {{ Js::from(session('token')) }};window.Auth = {user,token}
       @endauth

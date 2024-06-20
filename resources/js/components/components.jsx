@@ -154,15 +154,15 @@ export function Modal() {
     );
 }
 
-import iconBack from "@/icon/arrow-small-left_3916837.svg";
+import { FaArrowLeftLong } from "react-icons/fa6";
 export function Kembali() {
     return (
         <>
             <button
-                className="rounded py-1 px-3 mb-2"
+                className="px-3 py-1 mb-2 rounded"
                 onClick={() => window.history.back()}
             >
-                <img src={iconBack} className="w-10 text-white" alt="back" />
+                <FaArrowLeftLong />
             </button>
         </>
     );

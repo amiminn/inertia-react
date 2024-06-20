@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import { Card, Dropdown } from "@/components/components";
 import { useEffect, useState } from "react";
+import { FaPlus } from "react-icons/fa";
 function Page() {
     const [dataClient, setDataClient] = useState([]);
 
@@ -45,8 +46,9 @@ function Page() {
                     <div className="flex justify-end mb-2">
                         <Link
                             href="tambah-client"
-                            className="bg-gray-600 text-white py-2 px-6 rounded"
+                            className="flex items-center gap-3 bg-gray-600 text-white py-2 px-6 rounded"
                         >
+                            <FaPlus />
                             tambah client
                         </Link>
                     </div>

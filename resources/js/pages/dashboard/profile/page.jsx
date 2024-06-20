@@ -3,6 +3,7 @@ import { Card } from "@/components/components";
 import Reset from "./resetpass";
 import Information from "./editInformation";
 import Avatar from "./avatar";
+import AccessKey from "./accessKey";
 
 function Page() {
     return (
@@ -24,6 +25,9 @@ function Page() {
                             <Avatar />
                         </Card>
                     </div>
+                </div>
+                <div className="mt-3">
+                    <AccessKey />
                 </div>
             </Layout>
         </>

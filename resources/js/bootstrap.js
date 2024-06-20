@@ -45,14 +45,18 @@ window.api = window.location.origin + "/api/";
 window.base = window.location.origin + "/";
 window.subapi = window.location.origin + "/api" + window.location.pathname;
 
-// import Echo from "laravel-echo";
+import Echo from "laravel-echo";
 
-// import Pusher from "pusher-js";
-// window.Pusher = Pusher;
+import Pusher from "pusher-js";
+window.Pusher = Pusher;
 
-// window.Echo = new Echo({
-//     broadcaster: "pusher",
-//     key: Laravel.pusherKey,
-//     cluster: "ap1",
-//     forceTLS: true,
+window.Echo = new Echo({
+    broadcaster: "pusher",
+    key: Laravel.pusherKey,
+    cluster: "ap1",
+    forceTLS: true,
+});
+
+// window.Echo.channel("session").listen(".session.status", (e) => {
+//     console.log(e);
 // });

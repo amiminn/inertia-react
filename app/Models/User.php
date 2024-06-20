@@ -31,6 +31,7 @@ class User extends Authenticatable
         static::creating(function ($model) {
             $model->id = Response::epoch();
             $model->token = Response::random();
+            $model->access_key = Response::uuid();
         });
     }
 }

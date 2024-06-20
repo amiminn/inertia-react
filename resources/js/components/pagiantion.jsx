@@ -1,4 +1,4 @@
-import next from "@/icon/angle-right_3916959.svg";
+import { FaAngleLeft } from "react-icons/fa6";
 
 function Pagination({ onData, dataPaginate }) {
     async function hitPoin(data) {
@@ -7,25 +7,11 @@ function Pagination({ onData, dataPaginate }) {
     }
 
     function NextIcon() {
-        return (
-            <img
-                loading="lazy"
-                src={next}
-                alt="next"
-                className="w-6 h-6 py-[0.3rem]"
-            />
-        );
+        return <FaAngleLeft className="w-4 h-6 py-[0.3rem] rotate-180" />;
     }
 
     function PrevIcon() {
-        return (
-            <img
-                loading="lazy"
-                src={next}
-                alt="next"
-                className="w-6 h-6 py-[0.3rem] rotate-180"
-            />
-        );
+        return <FaAngleLeft className="w-4 h-6 py-[0.3rem] " />;
     }
 
     return (

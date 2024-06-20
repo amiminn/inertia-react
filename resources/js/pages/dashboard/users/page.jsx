@@ -3,6 +3,7 @@ import { Card } from "@/components/components";
 import { useEffect, useState } from "react";
 import { Dropdown } from "@/components/components";
 import Pagination from "@/components/pagiantion";
+import { FaPlus } from "react-icons/fa";
 
 function Page() {
     const [dataUser, setDataUser] = useState({
@@ -78,9 +79,9 @@ function Page() {
                     <div className="flex justify-end mb-2">
                         <Link
                             href="tambah-user"
-                            className="bg-gray-600 text-white py-2 px-6 rounded"
+                            className="flex items-center gap-3 bg-gray-600 text-white py-2 px-6 rounded"
                         >
-                            tambah user
+                            <FaPlus /> tambah user
                         </Link>
                     </div>
                     <div className="rounded ">

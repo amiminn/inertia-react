@@ -1,6 +1,8 @@
 import { Link } from "@inertiajs/inertia-react";
 import { useEffect, useRef, useState } from "react";
-import { devBar, menuBar } from "./menuBar";
+import { devBar, menuBar, service } from "./menuBar";
+import { appContext } from "@/context/appContext";
+import logo from "@/image/molecule_203132.png";
 
 export default function Layout({ children }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -64,8 +66,8 @@ export default function Layout({ children }) {
     const mainBorder = "border-[#262B40]";
 
     const setting = {
-        sidebarLogo: "https://flowbite.com/docs/images/logo.svg",
-        sidebarName: "Microservice",
+        sidebarLogo: logo,
+        sidebarName: "WA-Gateway",
     };
     const colorAvatar = "7469B6";
     const avatar = `https://ui-avatars.com/api/?background=${colorAvatar}&color=fff&name=${user.name}&bold=true`;
@@ -96,6 +98,30 @@ export default function Layout({ children }) {
                                                 : nonActive
                                         }
                                     >
+                                        {<data.icon className="mr-2 text-xl" />}
+                                        {data.name}
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                    <hr className="my-5 border-[#2E3650]" />
+                    {/* <div className="px-3 py-2 italic font-normal ">
+                        Development
+                    </div> */}
+                    <ul className="space-y-2 font-medium">
+                        {service.map((data, id) => {
+                            return (
+                                <li key={id}>
+                                    <Link
+                                        href={origin + data.link}
+                                        className={
+                                            url === "/" + data.link
+                                                ? active
+                                                : nonActive
+                                        }
+                                    >
+                                        {<data.icon className="mr-2 text-xl" />}
                                         {data.name}
                                     </Link>
                                 </li>
@@ -118,6 +144,7 @@ export default function Layout({ children }) {
                                                 : nonActive
                                         }
                                     >
+                                        {<data.icon className="mr-2 text-xl" />}
                                         {data.name}
                                     </Link>
                                 </li>
@@ -178,7 +205,7 @@ export default function Layout({ children }) {
                                     className="h-8 me-3"
                                     alt="FlowBite Logo"
                                 />
-                                <span className="self-center text-xl font-semibold text-white sm:text-2xl whitespace-nowrap ">
+                                <span className="self-center text-xl font-semibold text-white sm:text-xl whitespace-nowrap ">
                                     {setting.sidebarName}
                                 </span>
                             </div>
@@ -251,9 +278,11 @@ export default function Layout({ children }) {
 
     return (
         <>
-            <Nav />
-            <Aside />
-            <div className="p-4 pt-20 sm:ml-64">{children}</div>
+            <appContext.Provider value="asd">
+                <Nav />
+                <Aside />
+                <div className="p-4 pt-20 sm:ml-64">{children}</div>
+            </appContext.Provider>
         </>
     );
 }
